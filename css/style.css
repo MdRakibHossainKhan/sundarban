@@ -1,9 +1,11 @@
 /* Reset some default browser styles */
 body, h1, h2, h3, h4, p, ul, li, form, input, textarea, select, button {
+    max-width: 1080px;
     margin: 0;
     padding: 0;
     border: 0;
     outline: 0;
+    justify-self: center;
 }
 
 body {
@@ -14,7 +16,7 @@ body {
 }
 
 .container {
-    max-width: 960px;
+    max-width: 1080px;
     margin: 0 auto;
     padding: 20px;
 }
@@ -106,8 +108,7 @@ button:hover {
 }
 
 .product a {
-    text-decoration: none;
-    margin-right: 10px;
+    margin-top: 0;
 }
 
 .product input[type="number"] {
@@ -133,14 +134,12 @@ button:hover {
 
 /* Footer styles */
 .footer {
-    max-width: 960px;
     background-color: #333;
     color: #fff;
     text-align: center;
     padding: 10px;
     margin-top: 20px;
     margin-bottom: 20px;
-    justify-self: center;
 }
 
 /* Specific container styles */

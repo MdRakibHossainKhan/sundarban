@@ -10,7 +10,7 @@
             <h3>Quick Links</h3>
             <ul>
                 <li><a href="index.php">Home</a></li>
-                <li><a href="products.php">Products</a></li>
+                <li><a href="product_details.php">Product Details</a></li>
                 <li><a href="cart.php">Cart</a></li>
                 <li><a href="contact.php">Contact Us</a></li>
                 <?php if (isset($_SESSION['user_id'])): ?>

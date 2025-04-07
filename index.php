@@ -9,7 +9,7 @@ include('functions/cart.php');
 ?>
 
     <div class="content">
-        <h2>Featured Products</h2>
+        <h2>Product List</h2>
         <div class="products">
             <?php
             $products = getProducts($conn);
@@ -18,7 +18,7 @@ include('functions/cart.php');
                     echo "<div class='product'>";
                     echo "<h3>" . htmlspecialchars($product['name']) . "</h3>";
                     echo "<p>Price: $" . htmlspecialchars(number_format($product['price'], 2)) . "</p>";
-                    echo "<a href='products.php?id=" . htmlspecialchars($product['id']) . "'>View</a>";
+                    echo "<a href='product_details.php?id=" . htmlspecialchars($product['id']) . "'>View</a>";
                     ?>
                     <form method="post" action="cart.php">
                         <input type="number" name="quantity" value="1" min="1">

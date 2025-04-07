@@ -38,8 +38,8 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_privilege'] !== 'admin') {
                     echo "<td>$" . htmlspecialchars(number_format($product['price'], 2)) . "</td>";
                     echo "<td>" . htmlspecialchars($product['quantity']) . "</td>";
                     echo "<td>";
-                    echo "<a href='products.php?action=edit&id=" . htmlspecialchars($product['id']) . "'>Edit</a> | ";
-                    echo "<a href='products.php?action=delete&id=" . htmlspecialchars($product['id']) . "' onclick='return confirm(\"Are you sure?\")'>Delete</a>";
+                    echo "<a href='product_details.php?action=edit&id=" . htmlspecialchars($product['id']) . "'>Edit</a> | ";
+                    echo "<a href='product_details.php?action=delete&id=" . htmlspecialchars($product['id']) . "' onclick='return confirm(\"Are you sure?\")'>Delete</a>";
                     echo "</td>";
                     echo "</tr>";
                 }
@@ -118,7 +118,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_privilege'] !== 'admin') {
                 } else {
                     if (addProduct($conn, $name, $description, $price, $quantity)) {
                         echo "<p class='success'>Product added successfully.</p>";
-                        header("Location: products.php"); // Redirect to product list
+                        header("Location: product_details.php"); // Redirect to product list
                         exit();
                     } else {
                         echo "<p class='error'>Failed to add product. Please try again.</p>";
@@ -137,7 +137,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_privilege'] !== 'admin') {
                 } else {
                     if (updateProduct($conn, $id, $name, $description, $price, $quantity)) {
                         echo "<p class='success'>Product updated successfully.</p>";
-                        header("Location: products.php"); // Redirect to product list
+                        header("Location: product_details.php"); // Redirect to product list
                         exit();
                     } else {
                         echo "<p class='error'>Failed to update product. Please try again.</p>";
@@ -150,7 +150,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_privilege'] !== 'admin') {
             $id = $_GET['id'];
             if (deleteProduct($conn, $id)) {
                 echo "<p class='success'>Product deleted successfully.</p>";
-                header("Location: products.php"); // Redirect to product list
+                header("Location: product_details.php"); // Redirect to product list
                 exit();
             } else {
                 echo "<p class='error'>Failed to delete product.</p>";
