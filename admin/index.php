@@ -48,7 +48,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_privilege'] !== 'admin') {
             <a href="products.php">Manage Products</a>
             <a href="users.php">Manage Users</a>
             <a href="orders.php">Manage Orders</a>
-        </div>
+            <a href="feedback.php">View Feedback</a> </div>
     </div>
 
 <?php include('includes/footer.php'); ?>

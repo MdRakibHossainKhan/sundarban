@@ -1,3 +1,8 @@
+<?php // Ensure session is started if not already done before including footer.php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 </div>
 <footer class="footer">
     <div class="footer-content">
@@ -15,6 +20,12 @@
                 <li><a href="contact.php">Contact Us</a></li>
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <li><a href="profile.php">My Profile</a></li>
+                    <?php // Check if the logged-in user is an Admin
+                    if (isset($_SESSION['user_privilege']) && $_SESSION['user_privilege'] === 'admin'): ?>
+                        <li><a href="admin/index.php">Admin Panel</a></li> <?php endif; ?>
+                <?php else: ?>
+                    <li><a href="login.php">Login</a></li>
+                    <li><a href="register.php">Register</a></li>
                 <?php endif; ?>
             </ul>
         </div>

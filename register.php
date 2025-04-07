@@ -9,20 +9,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST['username']);
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
+    // Get the selected privilege from the form
+    $privilege = isset($_POST['privilege']) && $_POST['privilege'] === 'admin' ? 'admin' : 'customer'; // Default to customer for safety
 
-    // Validation
+    // Validation (keep existing validation)
     if (empty($username) || empty($email) || empty($password)) {
         $error_message = "All fields are required.";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error_message = "Invalid email format.";
     } elseif (strlen($password) < 8 || !preg_match('/[a-zA-Z]/', $password) || !preg_match('/\d/', $password)) {
         $error_message = "Password must be at least 8 characters long and contain both letters and numbers.";
-    } elseif (!isEmailUnique($conn, $email)) {
+    } elseif (!isEmailUnique($conn, $email)) { //
         $error_message = "Email already exists.";
-    } elseif (!isUsernameUnique($conn, $username)) {
+    } elseif (!isUsernameUnique($conn, $username)) { //
         $error_message = "Username already exists.";
     } else {
-        if (createUser($conn, $username, $email, $password)) {
+        // Pass the selected privilege to createUser
+        if (createUser($conn, $username, $email, $password, $privilege)) { //
+            // Maybe redirect based on role or just to login
             header("Location: login.php");
             exit();
         } else {
@@ -51,6 +55,13 @@ include('includes/header.php');
             <div>
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
+            </div>
+            <div>
+                <label for="privilege">Register as:</label>
+                <select name="privilege" id="privilege" required>
+                    <option value="customer" selected>Customer</option>
+                    <option value="admin">Admin</option>
+                </select>
             </div>
             <button type="submit">Register</button>
         </form>
