@@ -1,1 +1,59 @@
 <?php
+include('includes/db.php');
+include('functions/auth.php');
+
+$error_message = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    // Validation
+    if (empty($username) || empty($email) || empty($password)) {
+        $error_message = "All fields are required.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error_message = "Invalid email format.";
+    } elseif (strlen($password) < 8 || !preg_match('/[a-zA-Z]/', $password) || !preg_match('/\d/', $password)) {
+        $error_message = "Password must be at least 8 characters long and contain both letters and numbers.";
+    } elseif (!isEmailUnique($conn, $email)) {
+        $error_message = "Email already exists.";
+    } elseif (!isUsernameUnique($conn, $username)) {
+        $error_message = "Username already exists.";
+    } else {
+        if (createUser($conn, $username, $email, $password)) {
+            header("Location: login.php"); // Redirect to login
+            exit();
+        } else {
+            $error_message = "Registration failed. Please try again.";
+        }
+    }
+}
+
+include('includes/header.php');
+?>
+
+    <div class="register-container">
+        <h2>Register</h2>
+        <?php if ($error_message): ?>
+            <p class="error"><?php echo $error_message; ?></p>
+        <?php endif; ?>
+        <form method="post">
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <a href="login.php">Login</a></p>
+    </div>
+
+<?php include('includes/footer.php'); ?>
