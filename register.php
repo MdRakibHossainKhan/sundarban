@@ -1,13 +1,14 @@
 <?php
+session_start();
 include('includes/db.php');
 include('functions/auth.php');
 
 $error_message = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $username = trim($_POST['username']);
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
 
     // Validation
     if (empty($username) || empty($email) || empty($password)) {
@@ -22,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error_message = "Username already exists.";
     } else {
         if (createUser($conn, $username, $email, $password)) {
-            header("Location: login.php"); // Redirect to login
+            header("Location: login.php");
             exit();
         } else {
             $error_message = "Registration failed. Please try again.";
@@ -36,16 +37,16 @@ include('includes/header.php');
     <div class="register-container">
         <h2>Register</h2>
         <?php if ($error_message): ?>
-            <p class="error"><?php echo $error_message; ?></p>
+            <p class="error"><?php echo htmlspecialchars($error_message); ?></p>
         <?php endif; ?>
         <form method="post">
             <div>
                 <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
+                <input type="text" id="username" name="username" value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>" required>
             </div>
             <div>
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>" required>
             </div>
             <div>
                 <label for="password">Password:</label>

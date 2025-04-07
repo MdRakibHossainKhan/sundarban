@@ -13,7 +13,7 @@ if (isset($_GET['id'])) {
         <div class="product-view">
             <h2><?php echo htmlspecialchars($product['name']); ?></h2>
             <p><?php echo htmlspecialchars($product['description']); ?></p>
-            <p>Price: $<?php echo htmlspecialchars($product['price']); ?></p>
+            <p>Price: $<?php echo htmlspecialchars(number_format($product['price'], 2)); ?></p>
             <p>Quantity: <?php echo htmlspecialchars($product['quantity']); ?></p>
         </div>
         <?php

@@ -5,7 +5,7 @@ include('includes/header.php');
 include('includes/nav.php');
 include('functions/cart.php');
 
-// Ensure user is logged in to access checkout
+// Ensure user is logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
@@ -13,15 +13,11 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 $cart_items = getCartItems($conn, $user_id);
-$total_price = 0;
+$total_price = calculateCartTotal($conn, $user_id);
 
 if (!$cart_items) {
     echo "<p>Your cart is empty. Cannot proceed to checkout.</p>";
     exit();
-}
-
-foreach ($cart_items as $item) {
-    $total_price += $item['price'] * $item['quantity'];
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -29,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $payment_method = $_POST['payment_method'];
 
     // Store order details
-    $query = "INSERT INTO orders (user_id, total_amount, payment_method, status) VALUES (?, ?, ?, ?)";
+    $query = "INSERT INTO orders (user_id, order_date, total_amount, payment_method, status) VALUES (?, NOW(), ?, ?, ?)";
     $stmt = $conn->prepare($query);
     if (!$stmt) {
         die("Error preparing order insertion: " . $conn->error);

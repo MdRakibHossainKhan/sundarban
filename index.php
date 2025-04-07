@@ -4,7 +4,8 @@ include('includes/db.php');
 include('includes/header.php');
 include('includes/nav.php');
 include('functions/product.php');
-include('functions/cart.php'); // If you need cart functions here
+include('functions/cart.php');
+
 ?>
 
     <div class="content">
@@ -16,9 +17,15 @@ include('functions/cart.php'); // If you need cart functions here
                 foreach ($products as $product) {
                     echo "<div class='product'>";
                     echo "<h3>" . htmlspecialchars($product['name']) . "</h3>";
-                    echo "<p>Price: $" . htmlspecialchars($product['price']) . "</p>";
-                    echo "<a href='product.php?id=" . htmlspecialchars($product['id']) . "'>View</a>";
-                    echo "<a href='cart.php?action=add&product_id=" . htmlspecialchars($product['id']) . "'>Add to Cart</a>";
+                    echo "<p>Price: $" . htmlspecialchars(number_format($product['price'], 2)) . "</p>";
+                    echo "<a href='products.php?id=" . htmlspecialchars($product['id']) . "'>View</a>";
+                    ?>
+                    <form method="post" action="cart.php">
+                        <input type="number" name="quantity" value="1" min="1">
+                        <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['id']); ?>">
+                        <button type="submit" name="add_to_cart">Add to Cart</button>
+                    </form>
+                    <?php
                     echo "</div>";
                 }
             } else {

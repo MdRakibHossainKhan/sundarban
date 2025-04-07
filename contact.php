@@ -9,7 +9,7 @@ $success_message = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null; // Get user ID if logged in
-    $message = $_POST['message'];
+    $message = trim($_POST['message']); // Trim whitespace
 
     // Validation
     if (empty($message)) {
@@ -35,10 +35,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="contact-container">
         <h2>Contact Us</h2>
         <?php if ($error_message): ?>
-            <p class="error"><?php echo $error_message; ?></p>
+            <p class="error"><?php echo htmlspecialchars($error_message); ?></p>
         <?php endif; ?>
         <?php if ($success_message): ?>
-            <p class="success"><?php echo $success_message; ?></p>
+            <p class="success"><?php echo htmlspecialchars($success_message); ?></p>
         <?php endif; ?>
         <form method="post">
             <div>
