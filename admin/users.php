@@ -1,9 +1,6 @@
 <?php
 session_start();
-include('../includes/db.php'); //
-// Assuming you create an admin-specific header/nav
-// include('includes/admin_header.php');
-// include('includes/admin_nav.php');
+include('../includes/db.php');
 include('../functions/auth.php'); //
 
 // Admin Check: Ensure only admins can access this page
@@ -50,8 +47,7 @@ $users = getAllUsers($conn);
 
 ?>
 
-<?php include('../includes/header.php'); /* Replace with admin header if you have one */ ?>
-<?php include('../includes/nav.php'); /* Replace with admin nav if you have one */ ?>
+<?php include('includes/admin_header.php'); /* Replace with admin nav if you have one */ ?>
 
     <div class="admin-users container"><h2>Manage Users</h2>
 
@@ -112,4 +108,4 @@ $users = getAllUsers($conn);
         </table>
     </div>
 
-<?php include('../includes/footer.php'); // ?>
+<?php include('includes/admin_footer.php'); // ?>

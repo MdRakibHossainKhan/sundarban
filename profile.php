@@ -42,7 +42,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['change_password'])) {
         $error_message = "New password cannot be the same as the old password.";
     } else {
         // Verify the old password
-        if (verifyUser($conn, $_SESSION['user_email'], $old_password) === $_SESSION['user_id']) {
+        $verificationResult = verifyUser($conn, $_SESSION['user_email'], $old_password);
+        if ($verificationResult !== false && $verificationResult['user_id'] === $_SESSION['user_id']) {
             // Update the password
             $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
             $query = "UPDATE users SET password = ? WHERE id = ?";

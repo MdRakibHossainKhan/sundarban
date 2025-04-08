@@ -2,8 +2,8 @@
 session_start();
 include('../includes/db.php');
 include('includes/admin_header.php');
-include('functions/auth.php');
-include('functions/product.php');
+include('../functions/auth.php');
+include('../functions/product.php');
 
 // Check admin login
 if (!isset($_SESSION['user_id']) || $_SESSION['user_privilege'] !== 'admin') {
@@ -159,4 +159,4 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_privilege'] !== 'admin') {
         ?>
     </div>
 
-<?php include('includes/footer.php'); ?>
+<?php include('includes/admin_footer.php'); ?>

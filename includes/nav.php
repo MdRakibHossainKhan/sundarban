@@ -6,7 +6,6 @@ if (session_status() == PHP_SESSION_NONE) {
 <nav>
     <ul>
         <li><a href="index.php">Home</a></li>
-        <li><a href="product_details.php">Product Details</a></li>
         <li><a href="cart.php">Cart</a></li>
         <li><a href="contact.php">Contact Us</a></li>
 

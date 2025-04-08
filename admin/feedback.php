@@ -1,8 +1,6 @@
 <?php
 session_start();
 include('../includes/db.php');
-// include('includes/admin_header.php'); // Use admin header if created
-// include('includes/admin_nav.php'); // Use admin nav if created
 include('../functions/feedback.php'); // Include the new feedback functions
 
 // Admin Check
@@ -28,8 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_feedback'])) {
 $feedback_items = getAllFeedback($conn);
 ?>
 
-<?php include('../includes/header.php'); /* Replace with admin header */ ?>
-<?php include('../includes/nav.php'); /* Replace with admin nav */ ?>
+<?php include('includes/admin_header.php'); /* Replace with admin header */ ?>
 
     <div class="admin-feedback container">
         <h2>View Feedback</h2>
@@ -82,4 +79,4 @@ $feedback_items = getAllFeedback($conn);
 
     </div>
 
-<?php include('../includes/footer.php'); // ?>dedeedrftg
+<?php include('includes/admin_footer.php'); // ?>

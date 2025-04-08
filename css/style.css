@@ -163,3 +163,150 @@ button:hover {
 .remove-button:hover {
     background-color: #c82333;
 }
+
+/* --- General Admin Styles --- */
+
+.admin-dashboard,
+.admin-products,
+.admin-users,
+.admin-orders,
+.admin-feedback {
+    background-color: #fff; /* White background like login/register */
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-top: 20px; /* Space from nav */
+}
+
+.admin-dashboard h2,
+.admin-products h2,
+.admin-users h2,
+.admin-orders h2,
+.admin-feedback h2 {
+    margin-bottom: 20px;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+/* --- Admin Table Styling --- */
+/* Make admin tables look better */
+.admin-users table,
+.admin-orders table,
+.admin-feedback table,
+.admin-products table { /* Assuming products page also has a table */
+    width: 100%;
+    border-collapse: collapse; /* Clean borders */
+    margin-top: 20px;
+}
+
+.admin-users th, .admin-users td,
+.admin-orders th, .admin-orders td,
+.admin-feedback th, .admin-feedback td,
+.admin-products th, .admin-products td {
+    border: 1px solid #ddd; /* Light grey borders */
+    padding: 10px 12px; /* More padding */
+    text-align: left;
+    vertical-align: middle; /* Align content vertically */
+}
+
+.admin-users thead th,
+.admin-orders thead th,
+.admin-feedback thead th,
+.admin-products thead th {
+    background-color: #f2f2f2; /* Light grey header */
+    font-weight: bold;
+}
+
+.admin-users tbody tr:nth-child(even),
+.admin-orders tbody tr:nth-child(even),
+.admin-feedback tbody tr:nth-child(even),
+.admin-products tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* Zebra striping */
+}
+
+.admin-users tbody tr:hover,
+.admin-orders tbody tr:hover,
+.admin-feedback tbody tr:hover,
+.admin-products tbody tr:hover {
+    background-color: #f1f1f1; /* Hover effect */
+}
+
+/* Style admin action buttons/links within tables */
+.admin-users table button,
+.admin-orders table button,
+.admin-feedback table button,
+.admin-products table a, /* Style links like Edit/Delete */
+.admin-products table button {
+    padding: 5px 10px;
+    margin-right: 5px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block; /* Ensure proper spacing */
+    font-size: 0.9em;
+}
+.admin-products table a { /* Style links to look like buttons */
+    background-color: #6c757d; /* Grey */
+    color: white;
+    border: none;
+}
+.admin-products table a:hover {
+    background-color: #5a6268;
+}
+
+/* Style update buttons specifically if needed */
+.admin-users table button[name="update_privilege"],
+.admin-orders table button[name="update_status"] {
+    background-color: #ffc107; /* Amber */
+    color: #333;
+    border: none;
+}
+.admin-users table button[name="update_privilege"]:hover,
+.admin-orders table button[name="update_status"]:hover {
+    background-color: #e0a800;
+}
+
+/* Style delete buttons (using existing .remove-button class is good) */
+.admin-users table .remove-button,
+.admin-feedback table .remove-button,
+.admin-products table .remove-button { /* Target delete specifically if needed */
+    background-color: #dc3545; /* Red */
+    color: white;
+    border: none;
+}
+.admin-users table .remove-button:hover,
+.admin-feedback table .remove-button:hover,
+.admin-products table .remove-button:hover {
+    background-color: #c82333;
+}
+
+
+/* --- Admin Dashboard Specific Styles --- */
+.admin-dashboard .stats p {
+    background-color: #e9ecef;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    border-left: 4px solid #007bff; /* Blue left border */
+}
+
+.admin-dashboard .admin-links {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.admin-dashboard .admin-links a {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+.admin-dashboard .admin-links a:hover {
+    background-color: #0056b3;
+}

@@ -1,9 +1,7 @@
 <?php
 session_start();
 // Corrected Paths: Added '../' to go up one directory level
-include('../includes/db.php'); // Corrected path
-// Assuming you don't have a specific admin_header.php yet, use the main one
-include('../includes/header.php'); // Corrected path - Use main header
+include('../includes/db.php');
 include('../functions/auth.php'); // Corrected path
 
 // Admin Check: Ensure only admins can access this page
@@ -15,7 +13,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_privilege']) || $_SES
 
 ?>
 
-<?php include('../includes/nav.php'); // Corrected path - Use main navigation ?>
+<?php include('includes/admin_header.php'); // Corrected path - Use main navigation ?>
 
     <div class="admin-dashboard container"><h2>Admin Dashboard</h2>
         <div class="stats">
@@ -78,15 +76,9 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_privilege']) || $_SES
             }
             ?>
         </div>
-        <div class="admin-links">
-            <a href="products.php">Manage Products</a>
-            <a href="users.php">Manage Users</a>
-            <a href="orders.php">Manage Orders</a>
-            <a href="feedback.php">View Feedback</a>
-        </div>
     </div>
 
 <?php
 // Corrected Path: Added '../' to go up one directory level
-include('../includes/footer.php'); // Corrected path - Use main footer
+include('includes/admin_footer.php'); // Corrected path - Use main footer
 ?>

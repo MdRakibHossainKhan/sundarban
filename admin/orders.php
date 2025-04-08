@@ -1,9 +1,6 @@
 <?php
 session_start();
-include('../includes/db.php'); //
-// Assuming admin-specific header/nav
-// include('includes/admin_header.php');
-// include('includes/admin_nav.php');
+include('../includes/db.php');
 include('../functions/order.php'); // Include the new order functions
 
 // Admin Check
@@ -32,9 +29,7 @@ $allowed_statuses = ['pending', 'processing', 'shipped', 'completed', 'cancelled
 
 ?>
 
-<?php include('../includes/header.php'); /* Replace with admin header */ ?>
-<?php include('../includes/nav.php'); /* Replace with admin nav */ ?>
-
+<?php include('includes/admin_header.php'); /* Replace with admin header */ ?>
 
     <div class="admin-orders container"><h2>Manage Orders</h2>
 
@@ -90,4 +85,4 @@ $allowed_statuses = ['pending', 'processing', 'shipped', 'completed', 'cancelled
         </table>
     </div>
 
-<?php include('../includes/footer.php'); // ?>
+<?php include('includes/admin_footer.php'); // ?>
