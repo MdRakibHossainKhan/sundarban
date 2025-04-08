@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('../includes/db.php');
-include('../functions/auth.php'); //
+include('../functions/auth.php');
 
 // Admin Check: Ensure only admins can access this page
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_privilege']) || $_SESSION['user_privilege'] !== 'admin') {
@@ -47,7 +47,7 @@ $users = getAllUsers($conn);
 
 ?>
 
-<?php include('includes/admin_header.php'); /* Replace with admin nav if you have one */ ?>
+<?php include('includes/admin_header.php'); ?>
 
     <div class="admin-users container"><h2>Manage Users</h2>
 

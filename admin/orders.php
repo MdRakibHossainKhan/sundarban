@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('../includes/db.php');
-include('../functions/order.php'); // Include the new order functions
+include('../functions/order.php');
 
 // Admin Check
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_privilege']) || $_SESSION['user_privilege'] !== 'admin') {
@@ -29,7 +29,7 @@ $allowed_statuses = ['pending', 'processing', 'shipped', 'completed', 'cancelled
 
 ?>
 
-<?php include('includes/admin_header.php'); /* Replace with admin header */ ?>
+<?php include('includes/admin_header.php'); ?>
 
     <div class="admin-orders container"><h2>Manage Orders</h2>
 

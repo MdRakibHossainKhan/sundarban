@@ -1,10 +1,9 @@
 <?php
 session_start();
-// Ensure correct paths for includes relative to the admin directory
 include('../includes/db.php');
-include('includes/admin_header.php'); // Use the admin-specific header
-include('../functions/auth.php'); // Go up one level for functions
-include('../functions/product.php'); // Go up one level for functions
+include('includes/admin_header.php');
+include('../functions/auth.php');
+include('../functions/product.php');
 
 // Check admin login
 if (!isset($_SESSION['user_id']) || $_SESSION['user_privilege'] !== 'admin') {
@@ -40,7 +39,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
     }
-    // --- Removed 'update_product' elseif block ---
 }
 
 // --- Handle Delete Action ---
@@ -99,7 +97,6 @@ if (isset($_GET['message'])) {
                 <a href="products.php" style="margin-left: 10px;">Cancel</a>
             </form>
 
-            <?php // --- Removed 'edit' elseif block for displaying edit form --- ?>
         <?php endif; ?>
 
 
@@ -125,7 +122,7 @@ if (isset($_GET['message'])) {
                     echo "<td>$" . htmlspecialchars(number_format($product['price'], 2)) . "</td>";
                     echo "<td>" . htmlspecialchars($product['quantity']) . "</td>";
                     echo "<td>";
-                    // --- Removed Edit link ---
+
                     // Delete link with confirmation
                     echo "<a href='products.php?action=delete&id=" . htmlspecialchars($product['id']) . "' class='button remove-button' style='padding: 5px 8px; text-decoration: none; border-radius: 3px;' onclick='return confirm(\"Are you sure you want to delete this product? This cannot be undone.\")'>Delete</a>";
                     echo "</td>";
@@ -140,4 +137,4 @@ if (isset($_GET['message'])) {
 
     </div>
 
-<?php include('includes/admin_footer.php'); // Use the admin-specific footer ?>
+<?php include('includes/admin_footer.php'); ?>

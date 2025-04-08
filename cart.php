@@ -3,8 +3,7 @@ session_start();
 include('includes/db.php');
 include('includes/header.php');
 include('includes/nav.php');
-include('functions/cart.php'); // Includes the modified addToCart
-// include('functions/product.php'); // product functions already included via cart.php
+include('functions/cart.php');
 
 $cart_message = ''; // To display feedback
 
@@ -12,23 +11,18 @@ $cart_message = ''; // To display feedback
 if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_to_cart'])) ||
     !isset($_SESSION['user_id'])) {
     if (!isset($_SESSION['user_id'])) {
-        // Store intended action/product if possible, then redirect
-        // For simplicity, just redirecting to login for now
         header("Location: login.php");
         exit();
     }
 }
 
-$user_id = $_SESSION['user_id']; // Assume user is logged in now
+$user_id = $_SESSION['user_id'];
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['update_cart'])) {
-        // ... (existing code for updating cart - consider adding stock checks here too!) ...
         foreach ($_POST['quantity'] as $product_id => $quantity) {
             if (is_numeric($quantity) && $quantity > 0) {
-                // TODO: Add stock check before updating quantity
-                // Similar logic as in addToCart: check if $quantity <= available stock
                 $query = "UPDATE carts SET quantity = ? WHERE user_id = ? AND product_id = ?";
                 $stmt = $conn->prepare($query);
                 if (!$stmt) {
@@ -39,25 +33,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt->close();
             }
         }
-        header("Location: cart.php"); // Refresh
+        header("Location: cart.php");
         exit();
 
     } elseif (isset($_POST['remove_item'])) {
-        // ... (existing code for removing item) ...
         $product_id_to_remove = $_POST['product_id'];
         if (removeFromCart($conn, $user_id, $product_id_to_remove)) {
             $cart_message = "<p class='success'>Item removed successfully.</p>";
         } else {
             $cart_message = "<p class='error'>Failed to remove item.</p>";
         }
-        // Don't redirect here if displaying message on the same page
 
     } elseif (isset($_POST['add_to_cart'])) {
         $product_id_to_add = $_POST['product_id'];
         $quantity_to_add = $_POST['quantity'];
 
         if (is_numeric($product_id_to_add) && ctype_digit(strval($quantity_to_add)) && $quantity_to_add > 0) {
-            // Call the modified addToCart function
             $result = addToCart($conn, $user_id, $product_id_to_add, $quantity_to_add);
 
             // Set message based on the result
@@ -66,15 +57,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 $cart_message = "<p class='error'>" . htmlspecialchars($result['message']) . "</p>";
             }
-            // Redirect back to the cart page (or originating page) after setting message
-            // Using session flash message is better, but for simplicity:
             $_SESSION['cart_message'] = $cart_message; // Store message in session
             header("Location: cart.php"); // Redirect to show the message
             exit();
 
         } else {
             $_SESSION['cart_message'] = "<p class='error'>Invalid product data provided.</p>";
-            header("Location: cart.php"); // Redirect back
+            header("Location: cart.php");
             exit();
         }
     }
@@ -85,7 +74,6 @@ if (isset($_SESSION['cart_message'])) {
     $cart_message = $_SESSION['cart_message'];
     unset($_SESSION['cart_message']); // Clear message after displaying
 }
-
 
 // Fetch cart items and total AFTER potential modifications
 $cart_items = getCartItems($conn, $user_id);
@@ -118,8 +106,6 @@ $total_price = calculateCartTotal($conn, $user_id);
                                 $product = getProductById($conn, $item['product_id']);
                                 if ($product) {
                                     echo htmlspecialchars($product['name']);
-                                    // Optional: Display available stock?
-                                    // echo " (Stock: " . htmlspecialchars($product['quantity']) . ")";
                                 } else {
                                     echo "Product Not Found";
                                 }

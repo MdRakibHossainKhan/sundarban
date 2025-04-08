@@ -51,7 +51,6 @@ function getOrderDetails($conn, $order_id)
     return $order;
 }
 
-
 function updateOrderStatus($conn, $order_id, $status)
 {
     // Optional: Add validation for allowed status values

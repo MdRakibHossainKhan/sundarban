@@ -171,7 +171,7 @@ button:hover {
 .admin-users,
 .admin-orders,
 .admin-feedback {
-    background-color: #fff; /* White background like login/register */
+    background-color: #fff;
     padding: 25px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
@@ -190,11 +190,10 @@ button:hover {
 }
 
 /* --- Admin Table Styling --- */
-/* Make admin tables look better */
 .admin-users table,
 .admin-orders table,
 .admin-feedback table,
-.admin-products table { /* Assuming products page also has a table */
+.admin-products table {
     width: 100%;
     border-collapse: collapse; /* Clean borders */
     margin-top: 20px;
@@ -205,7 +204,7 @@ button:hover {
 .admin-feedback th, .admin-feedback td,
 .admin-products th, .admin-products td {
     border: 1px solid #ddd; /* Light grey borders */
-    padding: 10px 12px; /* More padding */
+    padding: 10px 12px;
     text-align: left;
     vertical-align: middle; /* Align content vertically */
 }
@@ -254,7 +253,6 @@ button:hover {
     background-color: #5a6268;
 }
 
-/* Style update buttons specifically if needed */
 .admin-users table button[name="update_privilege"],
 .admin-orders table button[name="update_status"] {
     background-color: #ffc107; /* Amber */
@@ -269,8 +267,8 @@ button:hover {
 /* Style delete buttons (using existing .remove-button class is good) */
 .admin-users table .remove-button,
 .admin-feedback table .remove-button,
-.admin-products table .remove-button { /* Target delete specifically if needed */
-    background-color: #dc3545; /* Red */
+.admin-products table .remove-button {
+    background-color: #dc3545;
     color: white;
     border: none;
 }

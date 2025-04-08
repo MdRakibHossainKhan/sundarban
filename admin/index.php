@@ -1,8 +1,7 @@
 <?php
 session_start();
-// Corrected Paths: Added '../' to go up one directory level
 include('../includes/db.php');
-include('../functions/auth.php'); // Corrected path
+include('../functions/auth.php');
 
 // Admin Check: Ensure only admins can access this page
 // Redirect to the main login page if not admin
@@ -13,13 +12,11 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_privilege']) || $_SES
 
 ?>
 
-<?php include('includes/admin_header.php'); // Corrected path - Use main navigation ?>
+<?php include('includes/admin_header.php'); ?>
 
     <div class="admin-dashboard container"><h2>Admin Dashboard</h2>
         <div class="stats">
             <?php
-            // Example: Count total users
-            // Ensure $conn is available (included via ../includes/db.php)
             if (isset($conn)) {
                 $user_count_result = $conn->query("SELECT COUNT(*) FROM users");
                 if ($user_count_result) {
@@ -28,7 +25,6 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_privilege']) || $_SES
                 } else {
                     echo "<p>Error fetching user count.</p>";
                 }
-                // Example: Count pending orders
                 $pending_order_result = $conn->query("SELECT COUNT(*) FROM orders WHERE status = 'pending'");
                 if ($pending_order_result) {
                     $pending_count = $pending_order_result->fetch_row()[0];
@@ -40,9 +36,6 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_privilege']) || $_SES
             } else {
                 echo "<p>Database connection not available.</p>";
             }
-
-
-            // Add other statistics here (product count, order count, etc.)
             ?>
         </div>
         <div class="recent-orders">
@@ -79,6 +72,5 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_privilege']) || $_SES
     </div>
 
 <?php
-// Corrected Path: Added '../' to go up one directory level
-include('includes/admin_footer.php'); // Corrected path - Use main footer
+include('includes/admin_footer.php');
 ?>

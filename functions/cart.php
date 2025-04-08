@@ -1,10 +1,8 @@
 <?php
 
-// Include product functions to get stock levels
-include_once('product.php'); // Use include_once to prevent re-declaration issues
+include_once('product.php');
 
 function getCartItems($conn, $user_id) {
-    // ... (existing code) ...
     $query = "SELECT c.id, c.product_id, c.quantity, p.name, p.price
               FROM carts c
               JOIN products p ON c.product_id = p.id
@@ -23,7 +21,6 @@ function getCartItems($conn, $user_id) {
 }
 
 function addToCart($conn, $user_id, $product_id, $quantity_to_add) {
-    // --- START STOCK CHECK ---
     // Get available product stock
     $product = getProductById($conn, $product_id);
     if (!$product) {
@@ -61,11 +58,9 @@ function addToCart($conn, $user_id, $product_id, $quantity_to_add) {
         }
         return ['success' => false, 'message' => $message];
     }
-    // --- END STOCK CHECK ---
-
 
     // Proceed with adding/updating cart if stock is sufficient
-    $final_result = false; // Track overall success
+    $final_result = false;
 
     // Check if the item is already in the cart (reuse $current_cart_quantity logic)
     if ($current_cart_quantity > 0) {
@@ -101,7 +96,6 @@ function addToCart($conn, $user_id, $product_id, $quantity_to_add) {
         return ['success' => false, 'message' => 'Failed to update cart.'];
     }
 }
-
 
 function removeFromCart($conn, $user_id, $product_id) {
     // ... (existing code) ...

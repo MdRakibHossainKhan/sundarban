@@ -1,4 +1,4 @@
-<?php // Ensure session is started if not already done before including nav.php
+<?php
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }

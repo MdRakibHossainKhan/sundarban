@@ -97,15 +97,9 @@ function updateUserPrivilege($conn, $user_id, $privilege)
 }
 
 // Note: Deleting users can have cascading effects if orders are linked.
-// Consider adding constraints or logic to handle this (e.g., anonymize user, disallow deletion if orders exist).
 function deleteUser($conn, $user_id)
 {
     // Add checks here if needed (e.g., prevent deleting the last admin)
-
-    // Before deleting the user, you might need to handle related data in other tables
-    // (e.g., set user_id to NULL in orders, feedback, carts, or delete them if appropriate)
-    // Example: DELETE FROM feedback WHERE user_id = ?; DELETE FROM carts WHERE user_id = ?; etc.
-    // For orders, you usually wouldn't delete them, maybe set user_id to NULL or a dummy 'deleted user' ID.
 
     $query = "DELETE FROM users WHERE id = ?";
     $stmt = $conn->prepare($query);

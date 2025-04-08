@@ -2,13 +2,13 @@
 include('includes/db.php');
 include('includes/header.php');
 include('includes/nav.php');
-include('functions/auth.php'); // If you want user authentication for feedback
+include('functions/auth.php');
 
 $error_message = "";
 $success_message = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null; // Get user ID if logged in
+    $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
     $message = trim($_POST['message']); // Trim whitespace
 
     // Validation

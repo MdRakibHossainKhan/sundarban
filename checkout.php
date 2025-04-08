@@ -21,7 +21,6 @@ if (!$cart_items) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Dummy payment processing (replace with a real payment gateway integration)
     $payment_method = $_POST['payment_method'];
 
     // Store order details
@@ -33,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $status = 'pending'; // Or 'processing', etc.
     $stmt->bind_param("idss", $user_id, $total_price, $payment_method, $status);
     $stmt->execute();
-    $order_id = $conn->insert_id; // Get the newly created order ID
+    $order_id = $conn->insert_id;
     $stmt->close();
 
     // Store order items
