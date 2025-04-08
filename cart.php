@@ -18,26 +18,29 @@ $total_price = calculateCartTotal($conn, $user_id);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['update_cart'])) {
-        // Handle quantity updates
-        foreach ($_POST['quantity'] as $product_id => $quantity) {
-            if (is_numeric($quantity) && $quantity > 0) {
-                $query = "UPDATE carts SET quantity = ? WHERE user_id = ? AND product_id = ?";
-                $stmt = $conn->prepare($query);
-                if (!$stmt) {
-                    die("Error preparing cart update: " . $conn->error);
-                }
-                $stmt->bind_param("iii", $quantity, $user_id, $product_id);
-                $stmt->execute();
-                $stmt->close();
-            }
-        }
-        header("Location: cart.php"); // Refresh
-        exit();
+        // ... existing code for updating cart ...
     } elseif (isset($_POST['remove_item'])) {
-        $product_id_to_remove = $_POST['product_id'];
-        removeFromCart($conn, $user_id, $product_id_to_remove);
-        header("Location: cart.php"); // Refresh
-        exit();
+        // ... existing code for removing item ...
+    } elseif (isset($_POST['add_to_cart'])) { // <<< ADD THIS BLOCK
+        $product_id_to_add = $_POST['product_id'];
+        $quantity_to_add = $_POST['quantity'];
+        // Basic validation (you might want more robust validation)
+        if (is_numeric($product_id_to_add) && is_numeric($quantity_to_add) && $quantity_to_add > 0) {
+            if (!isset($_SESSION['user_id'])) { // Ensure user is logged in
+                header("Location: login.php"); // Redirect to login if not logged in
+                exit();
+            }
+            $user_id = $_SESSION['user_id'];
+            // Call the function from functions/cart.php
+            addToCart($conn, $user_id, $product_id_to_add, $quantity_to_add);
+            // Redirect back to the cart page (or maybe the previous page)
+            header("Location: cart.php");
+            exit();
+        } else {
+            // Handle invalid input if necessary
+            echo "Invalid product data."; // Or redirect with an error message
+            exit();
+        }
     }
 }
 

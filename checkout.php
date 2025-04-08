@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Error preparing order insertion: " . $conn->error);
     }
     $status = 'pending'; // Or 'processing', etc.
-    $stmt->bind_param("ids", $user_id, $total_price, $payment_method, $status);
+    $stmt->bind_param("idss", $user_id, $total_price, $payment_method, $status);
     $stmt->execute();
     $order_id = $conn->insert_id; // Get the newly created order ID
     $stmt->close();
